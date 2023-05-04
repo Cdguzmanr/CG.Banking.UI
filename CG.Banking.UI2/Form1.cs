@@ -1,4 +1,4 @@
-sing CG.Banking.BL;
+using CG.Banking.BL;
 using System.ComponentModel;
 using System.Xml.Linq;
 

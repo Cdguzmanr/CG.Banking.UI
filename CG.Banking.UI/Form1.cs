@@ -1,4 +1,4 @@
-sing CG.Banking.BL;
+using CG.Banking.BL;
 using System.ComponentModel;
 using System.Xml.Linq;
 
@@ -56,6 +56,8 @@ namespace CG.Banking.UI
                 txtBDate.Text = selectedCustomer.DOB.ToString("d");
                 lblTextAge.Text = selectedCustomer.Age.ToString();
 
+                selectedCustomer.LoadDepositListFromDB();
+                selectedCustomer.LoadWithdrawalListFromDB();
 
 
                 // Display the Deposits and Withdrawals from the selected customer
@@ -169,13 +171,13 @@ namespace CG.Banking.UI
                     customer.LastName = txtLName.Text;
                     customer.SSN = txtSSN.Text;
                     customer.DOB = DateTime.Parse(txtBDate.Text);
+                    
                     MessageBox.Show("Customer added");
 
 
                     // Save
                     customers.Add(customer);
                     customer.InsertIntoDB();
-                    MessageBox.Show("Customer saved on DB");
                 }
 
                 RebindCustomers();
@@ -186,7 +188,7 @@ namespace CG.Banking.UI
                 MessageBox.Show(fe.Message);
                 return;
             }
-            catch (Exception)
+            catch (Exception exc)
             {
                 // if (string.IsNullOrEmptyText)) MessageBox.Show("please enter a customer name");
                 MessageBox.Show("Something REALLY went wrong!!!");
@@ -205,6 +207,7 @@ namespace CG.Banking.UI
             if (selectedCustomer != null)
             {
                 customers.Remove(selectedCustomer);
+                selectedCustomer.DeleteFromDB();
                 RebindCustomers();
             }
         }

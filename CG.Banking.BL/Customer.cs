@@ -46,7 +46,9 @@ namespace CG.Banking.BL
 
 
         // --- Constructors --- 
-        public Customer() { } // Default
+        public Customer() {
+
+        } // Default
 
         public Customer(int id, string firstanme, string lastname, string ssn, DateTime dob)
         {
@@ -85,7 +87,7 @@ namespace CG.Banking.BL
         {
             DepositList.Clear();
 
-            string sql = "SELECT * FROM transactions WHERE OwnerId = @ID and amount > 0";
+            string sql = "SELECT * FROM transactions WHERE CustomerID = @ID and amount > 0";
             DataTable table = DataAccess.SelectFromDB(sql, GetParameters());
 
             foreach (DataRow row in table.Rows)
@@ -98,7 +100,7 @@ namespace CG.Banking.BL
         {
             WithdrawalList.Clear();
 
-            string sql = "SELECT * FROM transactions WHERE OwnerId = @ID and amount < 0";
+            string sql = "SELECT * FROM transactions WHERE CustomerID = @ID and amount < 0";
             DataTable table = DataAccess.SelectFromDB(sql, GetParameters());
 
             foreach (DataRow row in table.Rows)
@@ -109,10 +111,10 @@ namespace CG.Banking.BL
 
         public void InsertIntoDB()
         {
-            string sql = "INSERT INTO customers(CustomerID, SSN, FirstName, LastName, DOB) "
-                + "VALUES(@ID, @SSN, @FirstName, @LastName, @DOB); SELECT SCOPE_IDENTITY()";
+            string sql = "INSERT INTO customers(SSN, FirstName, LastName, DOB) "
+                + "VALUES(@SSN, @FirstName, @LastName, @DOB); SELECT SCOPE_IDENTITY()";
 
-            ID = DataAccess.ExecuteSql(sql, GetParameters());
+            DataAccess.ExecuteSql(sql, GetParameters());
         }
 
         public void UpdateDB()

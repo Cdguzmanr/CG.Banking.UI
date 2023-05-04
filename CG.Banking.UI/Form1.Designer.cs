@@ -192,6 +192,7 @@
             // 
             this.txtSSN.Location = new System.Drawing.Point(437, 104);
             this.txtSSN.Name = "txtSSN";
+            this.txtSSN.PlaceholderText = "000-000-0000";
             this.txtSSN.Size = new System.Drawing.Size(125, 27);
             this.txtSSN.TabIndex = 8;
             // 

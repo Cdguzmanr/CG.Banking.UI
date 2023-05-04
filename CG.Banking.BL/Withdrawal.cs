@@ -30,7 +30,7 @@ namespace CG.Banking.BL
         public Withdrawal(DataRow depositRow)
         {
             WithdrawalID = Convert.ToInt32(depositRow["TransactionID"]);
-            Amount = Convert.ToDouble(depositRow["Amount"])!;
+            Amount = -Convert.ToDouble(depositRow["Amount"])!;
             Date = Convert.ToDateTime(depositRow["TransactionDate"])!;
         }
 

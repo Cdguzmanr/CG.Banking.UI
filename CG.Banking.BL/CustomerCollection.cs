@@ -83,6 +83,7 @@ namespace CG.Banking.BL
             {
                 Add(new Customer(row));
             }
+
         }
 
     }
